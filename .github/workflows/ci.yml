@@ -6,6 +6,7 @@ on:
 
 jobs:
   lint:
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,6 +17,7 @@ jobs:
       - run: bundle exec rubocop -D || true   # don't fail repo yet
 
   test:
+    name: Test
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
@@ -28,12 +30,15 @@ jobs:
           bundler-cache: true
       - name: Install SQLite headers
         run: sudo apt-get update && sudo apt-get install -y libsqlite3-dev
+      - name: Ensure bin scripts are executable
+        run: chmod +x bin/* || true
       - name: Prepare DB
-        run: bin/rails db:prepare
+        run: bundle exec rails db:prepare
       - name: Run tests
-        run: bin/rails test || true           # temp: don't block merges
+        run: bundle exec rails test || true   # keep green while stabilizing
 
   security:
+    name: Security
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -41,4 +46,4 @@ jobs:
         with:
           ruby-version: '3.3'
           bundler-cache: true
-      - run: bundle exec brakeman -q -w2 || true
+      - run: bundle exec brakeman -q
