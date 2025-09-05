@@ -1,0 +1,17 @@
+﻿.env
+config/master.key
+config/credentials.yml.enc
+vendor/bundle
+/tmp
+log/*.log
+storage/*
+node_modules
+coverage
+.byebug_history
+/.bundle
+/public/assets
+/public/packs
+/public/packs-test
+.yarn
+yarn-error.log
+.DS_Store
