@@ -1,4 +1,7 @@
-# Ricochet Billing System
+# PulseMeter
+
+[![CI](https://github.com/1mposer/PulseMeter/actions/workflows/ci.yml/badge.svg)](https://github.com/1mposer/PulseMeter/actions/workflows/ci.yml)
+
 
 Rails-based Point-of-Sale system for billiard halls with per-minute table pricing, member management, and comprehensive purchase tracking.
 

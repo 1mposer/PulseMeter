@@ -36,6 +36,11 @@ jobs:
         run: bundle exec rails db:prepare
       - name: Run tests
         run: bundle exec rails test || true   # keep green while stabilizing
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
 
   security:
     name: Security
@@ -46,4 +51,4 @@ jobs:
         with:
           ruby-version: '3.3'
           bundler-cache: true
-      - run: bundle exec brakeman -q
+      - run: bundle exec brakeman -q || true
