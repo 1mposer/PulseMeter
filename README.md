@@ -5,8 +5,7 @@
 ![Coverage](https://img.shields.io/badge/coverage-local-lightgrey)
 
 
-**PulseMeter** is a Rails 8.0–based Point-of-Sale system for billiard halls and similar venues.  
-Features include **per-minute table pricing**, **membership tracking**, **comprehensive receipts**, **offline-first design**, and an **audit-ready architecture**.
+**PulseMeter** is a Rails 8 point-of-sale built for pool halls. Core features: per-minute table/console sessions, reservations, member profiles, Wi-Fi check-ins, and printable receipts. Designed for fast local installs on Windows with a Hotwire UI and clean, audit-friendly architecture.
 
 ---
 
