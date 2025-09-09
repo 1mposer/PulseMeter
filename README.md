@@ -10,7 +10,7 @@ Features include **per-minute table pricing**, **membership tracking**, **compre
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 - Ruby 3.3+
@@ -33,7 +33,7 @@ bin/rails runner db/seeds/audit_demo.rb  # Loads synthetic test data (no real cu
 
 ---
 
-## 🧪 POS Workflow Demo
+##  POS Workflow Demo
 
 ```bash
 # 1. Open session via NFC/QR tag scan (uses table's default price: 0.50)
@@ -68,7 +68,7 @@ Complete JSON receipt with table time, drink/food purchases, and calculated tota
 
 ---
 
-## 🔒 Security & Quality Checks
+##  Security & Quality Checks
 
 ### Static Analysis
 ```bash
@@ -90,7 +90,7 @@ puts ActiveRecord::Base.connection.index_exists?(
 
 ---
 
-## 🏗️ Architecture Overview
+##  Architecture Overview
 
 ### Core Domain Models
 - **Session:** Time-tracked table usage with per-minute pricing
@@ -115,7 +115,7 @@ puts ActiveRecord::Base.connection.index_exists?(
 
 ---
 
-## 📚 Documentation
+##  Documentation
 
 - [`ARCHITECTURE.md`](./ARCHITECTURE.md) — Detailed system design and principles
 - [`AUDIT_SCOPE.md`](./AUDIT_SCOPE.md) — External audit checklist and scope
@@ -123,7 +123,7 @@ puts ActiveRecord::Base.connection.index_exists?(
 
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 
 - **Phase 1 (Complete):** Core billing system — sessions, members, purchases, receipts
 - **Phase 2 (In Progress):** Offline-first sync with API idempotency (`X-Request-Id`)
@@ -131,7 +131,7 @@ puts ActiveRecord::Base.connection.index_exists?(
 
 ---
 
-## 🧪 Development
+##  Development
 
 ---
 
