@@ -1,0 +1,216 @@
+--[ Route 1 ]----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | 
+Verb              | 
+URI               | /assets
+Controller#Action | Propshaft::Server
+Source Location   | propshaft (1.1.0) lib/propshaft/railtie.rb:47
+--[ Route 2 ]----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | open_scan
+Verb              | POST
+URI               | /scan/:tag_token/open(.:format)
+Controller#Action | scans#open {format: :json}
+Source Location   | /mnt/c/Users/user/Desktop/pulsemeter/config/routes.rb:4
+--[ Route 3 ]----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | assign_member_session
+Verb              | PATCH
+URI               | /sessions/:id/assign_member(.:format)
+Controller#Action | sessions#assign_member {format: :json}
+Source Location   | /mnt/c/Users/user/Desktop/pulsemeter/config/routes.rb:9
+--[ Route 4 ]----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | void_session
+Verb              | POST
+URI               | /sessions/:id/void(.:format)
+Controller#Action | sessions#void {format: :json}
+Source Location   | /mnt/c/Users/user/Desktop/pulsemeter/config/routes.rb:10
+--[ Route 5 ]----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | drink_purchases_session
+Verb              | POST
+URI               | /sessions/:id/drink_purchases(.:format)
+Controller#Action | sessions#create_drink_purchase {format: :json}
+Source Location   | /mnt/c/Users/user/Desktop/pulsemeter/config/routes.rb:11
+--[ Route 6 ]----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | food_purchases_session
+Verb              | POST
+URI               | /sessions/:id/food_purchases(.:format)
+Controller#Action | sessions#create_food_purchase {format: :json}
+Source Location   | /mnt/c/Users/user/Desktop/pulsemeter/config/routes.rb:12
+--[ Route 7 ]----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | sessions
+Verb              | POST
+URI               | /sessions(.:format)
+Controller#Action | sessions#create {format: :json}
+Source Location   | /mnt/c/Users/user/Desktop/pulsemeter/config/routes.rb:7
+--[ Route 8 ]----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | session
+Verb              | GET
+URI               | /sessions/:id(.:format)
+Controller#Action | sessions#show {format: :json}
+Source Location   | /mnt/c/Users/user/Desktop/pulsemeter/config/routes.rb:7
+--[ Route 9 ]----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | 
+Verb              | PATCH
+URI               | /sessions/:id(.:format)
+Controller#Action | sessions#update {format: :json}
+Source Location   | /mnt/c/Users/user/Desktop/pulsemeter/config/routes.rb:7
+--[ Route 10 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | 
+Verb              | PUT
+URI               | /sessions/:id(.:format)
+Controller#Action | sessions#update {format: :json}
+Source Location   | /mnt/c/Users/user/Desktop/pulsemeter/config/routes.rb:7
+--[ Route 11 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | turbo_recede_historical_location
+Verb              | GET
+URI               | /recede_historical_location(.:format)
+Controller#Action | turbo/native/navigation#recede
+Source Location   | turbo-rails (2.0.16) config/routes.rb:2
+--[ Route 12 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | turbo_resume_historical_location
+Verb              | GET
+URI               | /resume_historical_location(.:format)
+Controller#Action | turbo/native/navigation#resume
+Source Location   | turbo-rails (2.0.16) config/routes.rb:3
+--[ Route 13 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | turbo_refresh_historical_location
+Verb              | GET
+URI               | /refresh_historical_location(.:format)
+Controller#Action | turbo/native/navigation#refresh
+Source Location   | turbo-rails (2.0.16) config/routes.rb:4
+--[ Route 14 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | rails_postmark_inbound_emails
+Verb              | POST
+URI               | /rails/action_mailbox/postmark/inbound_emails(.:format)
+Controller#Action | action_mailbox/ingresses/postmark/inbound_emails#create
+Source Location   | actionmailbox (8.0.2) config/routes.rb:5
+--[ Route 15 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | rails_relay_inbound_emails
+Verb              | POST
+URI               | /rails/action_mailbox/relay/inbound_emails(.:format)
+Controller#Action | action_mailbox/ingresses/relay/inbound_emails#create
+Source Location   | actionmailbox (8.0.2) config/routes.rb:6
+--[ Route 16 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | rails_sendgrid_inbound_emails
+Verb              | POST
+URI               | /rails/action_mailbox/sendgrid/inbound_emails(.:format)
+Controller#Action | action_mailbox/ingresses/sendgrid/inbound_emails#create
+Source Location   | actionmailbox (8.0.2) config/routes.rb:7
+--[ Route 17 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | rails_mandrill_inbound_health_check
+Verb              | GET
+URI               | /rails/action_mailbox/mandrill/inbound_emails(.:format)
+Controller#Action | action_mailbox/ingresses/mandrill/inbound_emails#health_check
+Source Location   | actionmailbox (8.0.2) config/routes.rb:10
+--[ Route 18 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | rails_mandrill_inbound_emails
+Verb              | POST
+URI               | /rails/action_mailbox/mandrill/inbound_emails(.:format)
+Controller#Action | action_mailbox/ingresses/mandrill/inbound_emails#create
+Source Location   | actionmailbox (8.0.2) config/routes.rb:11
+--[ Route 19 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | rails_mailgun_inbound_emails
+Verb              | POST
+URI               | /rails/action_mailbox/mailgun/inbound_emails/mime(.:format)
+Controller#Action | action_mailbox/ingresses/mailgun/inbound_emails#create
+Source Location   | actionmailbox (8.0.2) config/routes.rb:14
+--[ Route 20 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | rails_conductor_inbound_emails
+Verb              | GET
+URI               | /rails/conductor/action_mailbox/inbound_emails(.:format)
+Controller#Action | rails/conductor/action_mailbox/inbound_emails#index
+Source Location   | actionmailbox (8.0.2) config/routes.rb:19
+--[ Route 21 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | 
+Verb              | POST
+URI               | /rails/conductor/action_mailbox/inbound_emails(.:format)
+Controller#Action | rails/conductor/action_mailbox/inbound_emails#create
+Source Location   | actionmailbox (8.0.2) config/routes.rb:19
+--[ Route 22 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | new_rails_conductor_inbound_email
+Verb              | GET
+URI               | /rails/conductor/action_mailbox/inbound_emails/new(.:format)
+Controller#Action | rails/conductor/action_mailbox/inbound_emails#new
+Source Location   | actionmailbox (8.0.2) config/routes.rb:19
+--[ Route 23 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | rails_conductor_inbound_email
+Verb              | GET
+URI               | /rails/conductor/action_mailbox/inbound_emails/:id(.:format)
+Controller#Action | rails/conductor/action_mailbox/inbound_emails#show
+Source Location   | actionmailbox (8.0.2) config/routes.rb:19
+--[ Route 24 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | new_rails_conductor_inbound_email_source
+Verb              | GET
+URI               | /rails/conductor/action_mailbox/inbound_emails/sources/new(.:format)
+Controller#Action | rails/conductor/action_mailbox/inbound_emails/sources#new
+Source Location   | actionmailbox (8.0.2) config/routes.rb:20
+--[ Route 25 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | rails_conductor_inbound_email_sources
+Verb              | POST
+URI               | /rails/conductor/action_mailbox/inbound_emails/sources(.:format)
+Controller#Action | rails/conductor/action_mailbox/inbound_emails/sources#create
+Source Location   | actionmailbox (8.0.2) config/routes.rb:21
+--[ Route 26 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | rails_conductor_inbound_email_reroute
+Verb              | POST
+URI               | /rails/conductor/action_mailbox/:inbound_email_id/reroute(.:format)
+Controller#Action | rails/conductor/action_mailbox/reroutes#create
+Source Location   | actionmailbox (8.0.2) config/routes.rb:23
+--[ Route 27 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | rails_conductor_inbound_email_incinerate
+Verb              | POST
+URI               | /rails/conductor/action_mailbox/:inbound_email_id/incinerate(.:format)
+Controller#Action | rails/conductor/action_mailbox/incinerates#create
+Source Location   | actionmailbox (8.0.2) config/routes.rb:24
+--[ Route 28 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | rails_service_blob
+Verb              | GET
+URI               | /rails/active_storage/blobs/redirect/:signed_id/*filename(.:format)
+Controller#Action | active_storage/blobs/redirect#show
+Source Location   | activestorage (8.0.2) config/routes.rb:5
+--[ Route 29 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | rails_service_blob_proxy
+Verb              | GET
+URI               | /rails/active_storage/blobs/proxy/:signed_id/*filename(.:format)
+Controller#Action | active_storage/blobs/proxy#show
+Source Location   | activestorage (8.0.2) config/routes.rb:6
+--[ Route 30 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | 
+Verb              | GET
+URI               | /rails/active_storage/blobs/:signed_id/*filename(.:format)
+Controller#Action | active_storage/blobs/redirect#show
+Source Location   | activestorage (8.0.2) config/routes.rb:7
+--[ Route 31 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | rails_blob_representation
+Verb              | GET
+URI               | /rails/active_storage/representations/redirect/:signed_blob_id/:variation_key/*filename(.:format)
+Controller#Action | active_storage/representations/redirect#show
+Source Location   | activestorage (8.0.2) config/routes.rb:9
+--[ Route 32 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | rails_blob_representation_proxy
+Verb              | GET
+URI               | /rails/active_storage/representations/proxy/:signed_blob_id/:variation_key/*filename(.:format)
+Controller#Action | active_storage/representations/proxy#show
+Source Location   | activestorage (8.0.2) config/routes.rb:10
+--[ Route 33 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | 
+Verb              | GET
+URI               | /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format)
+Controller#Action | active_storage/representations/redirect#show
+Source Location   | activestorage (8.0.2) config/routes.rb:11
+--[ Route 34 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | rails_disk_service
+Verb              | GET
+URI               | /rails/active_storage/disk/:encoded_key/*filename(.:format)
+Controller#Action | active_storage/disk#show
+Source Location   | activestorage (8.0.2) config/routes.rb:13
+--[ Route 35 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | update_rails_disk_service
+Verb              | PUT
+URI               | /rails/active_storage/disk/:encoded_token(.:format)
+Controller#Action | active_storage/disk#update
+Source Location   | activestorage (8.0.2) config/routes.rb:14
+--[ Route 36 ]---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prefix            | rails_direct_uploads
+Verb              | POST
+URI               | /rails/active_storage/direct_uploads(.:format)
+Controller#Action | active_storage/direct_uploads#create
+Source Location   | activestorage (8.0.2) config/routes.rb:15

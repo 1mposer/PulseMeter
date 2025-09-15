@@ -37,6 +37,11 @@ module Sessions
     def create_completed_session_archive
       receipt_data = ReceiptSerializer.new(@session).as_json
 
+      # Update member session totals
+      if @session.member
+        @session.member.increment!(:total_spent_sessions, @session.grand_total)
+      end
+
       CompletedSession.create!(
         session_id: @session.id,
         membership_id: @session.membership_id,

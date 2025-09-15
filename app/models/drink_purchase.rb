@@ -9,6 +9,7 @@ class DrinkPurchase < ApplicationRecord
   
   validate :item_must_be_drink_category
   validate :session_must_be_open
+  validate :sufficient_stock_available
 
   before_validation :calculate_total_price
   after_create :update_stock_and_member_totals
@@ -31,9 +32,17 @@ class DrinkPurchase < ApplicationRecord
     errors.add(:session, "must be open") unless session.status == "open"
   end
 
+  def sufficient_stock_available
+    return unless item && quantity
+
+    if item.stock_quantity < quantity
+      errors.add(:quantity, "exceeds available stock (#{item.stock_quantity} available)")
+    end
+  end
+
   def update_stock_and_member_totals
-    # Subtract from the item's stock
-    item.decrement!(:stock_quantity, quantity) if item.stock_quantity >= quantity
+    # Subtract from the item's stock (validation ensures sufficient stock)
+    item.decrement!(:stock_quantity, quantity)
 
     # Update member total spent on drinks (if member exists)
     member&.increment!(:total_spent_drinks, total_price)

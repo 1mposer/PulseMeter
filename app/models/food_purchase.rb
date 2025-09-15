@@ -9,6 +9,7 @@ class FoodPurchase < ApplicationRecord
   
   validate :item_must_be_food_category
   validate :session_must_be_open
+  validate :sufficient_stock_available
 
   before_validation :calculate_total_price
   after_create :update_stock_and_member_totals
@@ -31,11 +32,19 @@ class FoodPurchase < ApplicationRecord
     errors.add(:session, "must be open") unless session.status == "open"
   end
 
-  def update_stock_and_member_totals
-    # Subtract from the item's stock
-    item.decrement!(:stock_quantity, quantity) if item.stock_quantity >= quantity
+  def sufficient_stock_available
+    return unless item && quantity
 
-    # Update member total spent on food (we'll add this field later if needed)
-    # For now, we could track total purchases or add a total_spent_food field to members
+    if item.stock_quantity < quantity
+      errors.add(:quantity, "exceeds available stock (#{item.stock_quantity} available)")
+    end
+  end
+
+  def update_stock_and_member_totals
+    # Subtract from the item's stock (validation ensures sufficient stock)
+    item.decrement!(:stock_quantity, quantity)
+
+    # Update member total spent on food
+    member&.increment!(:total_spent_food, total_price)
   end
 end

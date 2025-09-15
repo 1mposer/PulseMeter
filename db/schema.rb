@@ -72,6 +72,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_28_130000) do
     t.datetime "updated_at", null: false
     t.decimal "total_spent_drinks", precision: 10, scale: 2, default: "0.0"
     t.string "name"
+    t.index ["email"], name: "index_members_on_email_unique", unique: true
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -97,6 +98,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_28_130000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "default_price_per_minute", precision: 10, scale: 2, default: "0.5", null: false
+    t.index ["name"], name: "index_tables_on_name_unique", unique: true
   end
 
   create_table "tags", force: :cascade do |t|

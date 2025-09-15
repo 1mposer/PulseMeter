@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+ruby ">= 3.3.2", "< 3.4"
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0.2"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
@@ -54,6 +56,12 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
+  # Audit and analysis tools
+  gem "rails-erd"          # ERD generation
+  gem "railroady"          # Model/controller graphs
+  gem "annotate"           # Schema annotations
+  gem "reek"               # Code smell detection
 end
 
 group :test do
