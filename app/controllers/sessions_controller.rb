@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:create, :update, :assign_member, :void]
+  skip_before_action :verify_authenticity_token, only: [:create, :update, :assign_member, :void, :create_drink_purchase, :create_food_purchase]
 
   rescue_from ActionController::ParameterMissing do |e|
     render json: ErrorSerializer.from_messages(e.message), status: :bad_request

@@ -1,0 +1,25 @@
+{
+  "time_in": "2025-09-24T08:39:43Z",
+  "time_out": null,
+  "duration_minutes": 31,
+  "price_per_minute": "1.50",
+  "estimated_total": "46.50",
+  "status": "open",
+  "member": {
+    "name": "Member 1"
+  },
+  "table": {
+    "name": "Table 1"
+  },
+  "tag": {
+    "token": "DEMO_001",
+    "active": true
+  },
+  "opened_via": "nfc",
+  "purchases_summary": {
+    "drinks_count": 1,
+    "drinks_total": "10.00",
+    "food_count": 1,
+    "food_total": "25.00"
+  }
+}
