@@ -1,0 +1,10 @@
+{
+  "session_id": 301,
+  "item": {
+    "name": "Water",
+    "category": "drink"
+  },
+  "quantity": 2,
+  "unit_price": "5.00",
+  "total_price": "10.00"
+}
