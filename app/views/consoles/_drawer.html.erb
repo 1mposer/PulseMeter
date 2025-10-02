@@ -1,0 +1,74 @@
+<turbo-frame id="entity_drawer">
+  <div class="p-6 h-full flex flex-col">
+    <!-- Header -->
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-white mb-2"><%= console[:name] %></h2>
+      <div class="flex items-center gap-3">
+        <% if console[:status] == 'running' %>
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-800 text-green-200">
+            In Use
+          </span>
+        <% else %>
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-700 text-gray-300">
+            Available
+          </span>
+        <% end %>
+        <span class="text-sm text-gray-400">$<%= console[:price_per_minute] %>/min</span>
+      </div>
+    </div>
+
+    <!-- Timer Section (if running) -->
+    <% if console[:status] == 'running' %>
+      <div class="bg-gray-900 rounded-lg p-6 mb-6">
+        <p class="text-sm text-gray-400 mb-2">Session Duration</p>
+        <div
+          data-controller="timer"
+          data-timer-start-at-value="<%= console[:started_at] %>"
+          class="text-4xl font-mono text-green-400"
+        >00:00:00</div>
+        <p class="text-sm text-gray-500 mt-2">
+          Started at <%= Time.parse(console[:started_at]).strftime("%H:%M") %>
+        </p>
+        <div class="mt-4 pt-4 border-t border-gray-700">
+          <p class="text-sm text-gray-400">Current cost estimate:</p>
+          <p class="text-2xl font-bold text-white mt-1">$0.00</p>
+        </div>
+      </div>
+    <% end %>
+
+    <!-- Actions -->
+    <div class="flex-1 flex flex-col justify-end space-y-3">
+      <% if console[:status] == 'running' %>
+        <button
+          data-controller="toast"
+          data-action="click->toast#showSuccess"
+          data-toast-message="Console session ended (UI stub only)"
+          class="w-full py-4 bg-red-600 text-white text-lg font-medium rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+        >
+          End Session
+        </button>
+        <button
+          onclick="window.location.href='/ui/goods?entity=console&id=<%= console[:id] %>'"
+          class="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+        >
+          Add Purchase
+        </button>
+      <% else %>
+        <button
+          data-controller="toast"
+          data-action="click->toast#showSuccess"
+          data-toast-message="Console session started (UI stub only)"
+          class="w-full py-4 bg-green-600 text-white text-lg font-medium rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
+        >
+          Start Session
+        </button>
+      <% end %>
+
+      <div class="pt-3 border-t border-gray-700">
+        <button class="text-sm text-gray-400 hover:text-white transition-colors">
+          View History
+        </button>
+      </div>
+    </div>
+  </div>
+</turbo-frame>

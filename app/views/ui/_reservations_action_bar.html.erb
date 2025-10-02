@@ -1,0 +1,71 @@
+<div id="action_bar" class="px-6 py-3 bg-gray-800 border-t border-gray-700" data-controller="action-bar">
+  <div class="flex items-center justify-between">
+    <div class="flex gap-2">
+      <!-- Primary Actions -->
+      <button
+        data-action-bar-target="newBtn"
+        data-action="click->action-bar#newReservation"
+        class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+      >
+        New (N)
+      </button>
+
+      <button
+        data-action-bar-target="checkInBtn"
+        data-action="click->action-bar#checkIn"
+        disabled
+        class="px-4 py-2 bg-gray-700 text-gray-400 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
+      >
+        Check-in (I)
+      </button>
+
+      <button
+        data-action-bar-target="endBtn"
+        data-action="click->action-bar#end"
+        disabled
+        class="px-4 py-2 bg-gray-700 text-gray-400 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+      >
+        End (E)
+      </button>
+
+      <button
+        data-action-bar-target="extendBtn"
+        data-action="click->action-bar#extend"
+        disabled
+        class="px-4 py-2 bg-gray-700 text-gray-400 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-colors"
+      >
+        Extend +15 (+)
+      </button>
+    </div>
+
+    <div class="flex gap-2">
+      <!-- Secondary Actions -->
+      <button
+        data-action-bar-target="moveBtn"
+        data-action="click->action-bar#move"
+        disabled
+        class="px-4 py-2 bg-gray-700 text-gray-400 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors"
+      >
+        Move (M)
+      </button>
+
+      <button
+        data-action-bar-target="cancelBtn"
+        data-action="click->action-bar#cancel"
+        disabled
+        class="px-4 py-2 bg-gray-700 text-gray-400 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+      >
+        Cancel (X)
+      </button>
+
+      <button
+        data-action-bar-target="noShowBtn"
+        data-action="click->action-bar#noShow"
+        disabled
+        class="px-4 py-2 bg-gray-700 text-gray-400 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500 transition-colors"
+      >
+        No-show
+      </button>
+    </div>
+  </div>
+</div>

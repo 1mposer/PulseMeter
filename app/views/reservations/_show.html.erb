@@ -1,0 +1,127 @@
+<turbo-frame id="reservations_drawer">
+  <div class="p-6 h-full flex flex-col">
+    <!-- Header -->
+    <div class="mb-4">
+      <h2 class="text-xl font-bold text-white mb-2">
+        Reservation Details
+      </h2>
+      <div class="flex items-center gap-3">
+        <% if reservation[:status] == 'reserved' %>
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-800 text-yellow-200">
+            RESERVED
+          </span>
+        <% else %>
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-800 text-green-200">
+            SEATED
+          </span>
+        <% end %>
+        <span class="text-sm text-gray-400">
+          <%= reservation[:start_time].strftime("%H:%M") %> • <%= reservation[:duration] %> min
+        </span>
+      </div>
+    </div>
+
+    <!-- Timer -->
+    <% if reservation[:status] == 'reserved' && reservation[:start_time] > Time.current %>
+      <div class="bg-gray-900 rounded-lg p-4 mb-4">
+        <p class="text-sm text-gray-400 mb-1">Starts in</p>
+        <div
+          data-controller="timer"
+          data-timer-countdown-value="true"
+          data-timer-start-at-value="<%= reservation[:start_time].iso8601 %>"
+          class="text-3xl font-mono text-yellow-400"
+        >00:00:00</div>
+      </div>
+    <% elsif reservation[:status] == 'seated' %>
+      <div class="bg-gray-900 rounded-lg p-4 mb-4">
+        <p class="text-sm text-gray-400 mb-1">Time Elapsed</p>
+        <div
+          data-controller="timer"
+          data-timer-start-at-value="<%= reservation[:start_time].iso8601 %>"
+          class="text-3xl font-mono text-green-400"
+        >00:00:00</div>
+        <p class="text-sm text-gray-500 mt-2">
+          Ends at <%= (reservation[:start_time] + reservation[:duration].minutes).strftime("%H:%M") %>
+        </p>
+      </div>
+    <% end %>
+
+    <!-- Guest Info -->
+    <div class="space-y-3 mb-6">
+      <div>
+        <p class="text-sm text-gray-400">Guest</p>
+        <p class="text-lg text-white font-medium"><%= reservation[:guest_name] %></p>
+      </div>
+
+      <div>
+        <p class="text-sm text-gray-400">Phone</p>
+        <p class="text-white"><%= reservation[:phone] %></p>
+      </div>
+
+      <div>
+        <p class="text-sm text-gray-400">Table</p>
+        <p class="text-white">Table <%= reservation[:table_id] %></p>
+      </div>
+
+      <% if reservation[:notes].present? %>
+        <div>
+          <p class="text-sm text-gray-400">Notes</p>
+          <p class="text-white"><%= reservation[:notes] %></p>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Spacer -->
+    <div class="flex-1"></div>
+
+    <!-- Quick Actions -->
+    <div class="space-y-2 pt-4 border-t border-gray-700">
+      <% if reservation[:status] == 'reserved' %>
+        <button
+          data-controller="toast"
+          data-action="click->toast#showSuccess"
+          data-toast-message="Guest checked in (UI stub)"
+          class="w-full py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+        >
+          Check In
+        </button>
+      <% else %>
+        <button
+          data-controller="toast"
+          data-action="click->toast#showSuccess"
+          data-toast-message="Reservation ended (UI stub)"
+          class="w-full py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          End Session
+        </button>
+        <button
+          data-controller="toast"
+          data-action="click->toast#showSuccess"
+          data-toast-message="Extended by 15 minutes (UI stub)"
+          class="w-full py-2 bg-gray-700 text-white rounded hover:bg-gray-600"
+        >
+          Extend +15 min
+        </button>
+      <% end %>
+
+      <div class="flex gap-2">
+        <button
+          data-controller="toast"
+          data-action="click->toast#showSuccess"
+          data-toast-message="Reservation cancelled (UI stub)"
+          class="flex-1 py-2 bg-red-700 text-white rounded hover:bg-red-600"
+        >
+          Cancel
+        </button>
+        <button
+          data-controller="toast"
+          data-action="click->toast#showSuccess"
+          data-toast-message="Marked as no-show (UI stub)"
+          class="flex-1 py-2 bg-gray-700 text-gray-300 rounded hover:bg-gray-600"
+        >
+          No-show
+        </button>
+      </div>
+    </div>
+  </div>
+</turbo-frame>

@@ -1,0 +1,87 @@
+<turbo-frame id="main_panel">
+  <div class="flex h-full">
+    <!-- Left: Entity Drawer -->
+    <div class="w-96 bg-gray-800 border-r border-gray-700 overflow-y-auto">
+      <turbo-frame id="entity_drawer">
+        <div class="p-8 text-center text-gray-500">
+          <p class="text-lg">Select a console to view details</p>
+        </div>
+      </turbo-frame>
+    </div>
+
+    <!-- Right: Consoles Grid -->
+    <div class="flex-1 p-8 overflow-y-auto" data-controller="entity-list">
+      <h1 class="text-3xl font-bold text-white mb-6">PlayStation Consoles</h1>
+
+      <div class="grid grid-cols-2 xl:grid-cols-3 gap-6">
+        <%
+          # Mock data - replace with real data later
+          consoles = [
+            {id: 1, name: "PS5 #1", status: 'running', started_at: 45.minutes.ago.iso8601},
+            {id: 2, name: "PS5 #2", status: 'available', started_at: nil},
+            {id: 3, name: "PS4 Pro", status: 'available', started_at: nil},
+            {id: 4, name: "Xbox Series X", status: 'running', started_at: 20.minutes.ago.iso8601}
+          ]
+        %>
+
+        <% if consoles.empty? %>
+          <!-- Empty state -->
+          <div class="col-span-full p-12 text-center">
+            <div class="text-6xl text-gray-600 mb-4">⊡</div>
+            <p class="text-xl text-gray-400 mb-2">No consoles configured yet</p>
+            <p class="text-sm text-gray-500">Consoles will be added later in Admin (stub)</p>
+          </div>
+        <% else %>
+          <% consoles.each do |console| %>
+          <button
+            data-turbo-frame="entity_drawer"
+            data-action="click->entity-list#selectCard"
+            data-entity-id="<%= console[:id] %>"
+            tabindex="0"
+            aria-selected="false"
+            class="group relative bg-gray-800 rounded-lg p-6 border-2 border-gray-700
+                   hover:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500
+                   transition-all cursor-pointer text-left
+                   aria-selected:border-green-500 aria-selected:bg-gray-700
+                   <%= console[:status] == 'running' ? 'border-green-500/50 bg-green-950/20' : '' %>"
+            onclick="this.href = '<%= console_path(console[:id]) %>'; return true;"
+          >
+            <h3 class="text-xl font-semibold text-white mb-3"><%= console[:name] %></h3>
+
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-400">Status:</span>
+                <% if console[:status] == 'running' %>
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-800 text-green-200">
+                    Running
+                  </span>
+                <% else %>
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-700 text-gray-300">
+                    Available
+                  </span>
+                <% end %>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-400">Rate:</span>
+                <span class="text-sm text-white">$1.00/min</span>
+              </div>
+
+              <% if console[:status] == 'running' %>
+                <div class="pt-2 border-t border-gray-700">
+                  <span class="text-xs text-gray-400 block mb-1">Elapsed:</span>
+                  <span
+                    data-controller="timer"
+                    data-timer-start-at-value="<%= console[:started_at] %>"
+                    class="text-lg text-green-400 font-mono"
+                  >00:00:00</span>
+                </div>
+              <% end %>
+            </div>
+          </button>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</turbo-frame>

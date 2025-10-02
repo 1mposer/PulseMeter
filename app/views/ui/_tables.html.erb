@@ -1,0 +1,76 @@
+<turbo-frame id="main_panel">
+  <div class="flex h-full">
+    <!-- Left: Entity Drawer -->
+    <div class="w-96 bg-gray-800 border-r border-gray-700 overflow-y-auto">
+      <turbo-frame id="entity_drawer">
+        <div class="p-8 text-center text-gray-500">
+          <p class="text-lg">Select a table to view details</p>
+        </div>
+      </turbo-frame>
+    </div>
+
+    <!-- Right: Tables Grid -->
+    <div class="flex-1 p-8 overflow-y-auto" data-controller="entity-list">
+      <h1 class="text-3xl font-bold text-white mb-6">Tables</h1>
+
+      <div class="grid grid-cols-3 xl:grid-cols-4 gap-4">
+        <%
+          # Mock data - replace with real data later
+          tables = (1..12).map do |num|
+            status = num % 3 == 0 ? 'running' : 'available'
+            {
+              id: num,
+              name: "Table #{num}",
+              status: status,
+              started_at: status == 'running' ? 30.minutes.ago.iso8601 : nil
+            }
+          end
+        %>
+
+        <% if tables.empty? %>
+          <!-- Empty state -->
+          <div class="col-span-full p-12 text-center">
+            <div class="text-6xl text-gray-600 mb-4">⊙</div>
+            <p class="text-xl text-gray-400 mb-2">No tables configured yet</p>
+            <p class="text-sm text-gray-500">Tables will be added later in Admin (stub)</p>
+          </div>
+        <% else %>
+          <% tables.each do |table| %>
+          <button
+            data-turbo-frame="entity_drawer"
+            data-action="click->entity-list#selectCard"
+            data-entity-id="<%= table[:id] %>"
+            tabindex="0"
+            aria-selected="false"
+            class="group relative bg-gray-800 rounded-lg p-6 border-2 border-gray-700
+                   hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500
+                   transition-all cursor-pointer text-left
+                   aria-selected:border-blue-500 aria-selected:bg-gray-700
+                   <%= table[:status] == 'running' ? 'border-green-500/50 bg-green-950/20' : '' %>"
+            onclick="this.href = '<%= table_path(table[:id]) %>'; return true;"
+          >
+            <h3 class="text-xl font-semibold text-white mb-2"><%= table[:name] %></h3>
+
+            <div class="flex items-center justify-between">
+              <% if table[:status] == 'running' %>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-800 text-green-200">
+                  Running
+                </span>
+                <span
+                  data-controller="timer"
+                  data-timer-start-at-value="<%= table[:started_at] %>"
+                  class="text-sm text-green-400 font-mono"
+                >00:00:00</span>
+              <% else %>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-700 text-gray-300">
+                  Available
+                </span>
+              <% end %>
+            </div>
+          </button>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</turbo-frame>

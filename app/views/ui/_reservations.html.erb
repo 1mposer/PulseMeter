@@ -1,0 +1,65 @@
+<turbo-frame id="main_panel">
+  <div class="h-full flex flex-col" data-controller="reservations">
+    <!-- Header -->
+    <div class="px-6 py-4 bg-gray-800 border-b border-gray-700">
+      <div class="flex items-center justify-between">
+        <h1 class="text-2xl font-bold text-white">Reservations</h1>
+        <div class="flex items-center gap-4">
+          <!-- Quick filters -->
+          <div class="flex gap-2">
+            <button class="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">Now</button>
+            <button class="px-3 py-1 bg-gray-700 text-white text-sm rounded hover:bg-gray-600">+2h</button>
+            <button class="px-3 py-1 bg-gray-700 text-white text-sm rounded hover:bg-gray-600">Tonight</button>
+          </div>
+          <time class="text-sm text-gray-400" data-controller="clock">
+            <%= Time.current.strftime("%H:%M") %>
+          </time>
+        </div>
+      </div>
+    </div>
+
+    <!-- Body: Two lists + drawer -->
+    <div class="flex-1 flex overflow-hidden">
+      <!-- Left: Available Tables -->
+      <div class="flex-1 border-r border-gray-700">
+        <div class="h-full flex flex-col">
+          <div class="px-4 py-3 bg-gray-800 border-b border-gray-700">
+            <h2 class="text-lg font-semibold text-white">Available Tables</h2>
+          </div>
+          <turbo-frame id="reservations_left" src="<%= available_reservations_path %>" class="flex-1 overflow-y-auto" data-controller="loading">
+            <div class="p-8 text-center text-gray-500">Loading...</div>
+          </turbo-frame>
+        </div>
+      </div>
+
+      <!-- Right: Active Reservations -->
+      <div class="flex-1 border-r border-gray-700">
+        <div class="h-full flex flex-col">
+          <div class="px-4 py-3 bg-gray-800 border-b border-gray-700">
+            <h2 class="text-lg font-semibold text-white">Reserved & Seated</h2>
+          </div>
+          <turbo-frame id="reservations_right" src="<%= active_reservations_path %>" class="flex-1 overflow-y-auto" data-controller="loading">
+            <div class="p-8 text-center text-gray-500">Loading...</div>
+          </turbo-frame>
+        </div>
+      </div>
+
+      <!-- Drawer -->
+      <div class="w-96 bg-gray-800 border-l border-gray-700">
+        <turbo-frame id="reservations_drawer" class="h-full" data-controller="loading">
+          <div class="p-8 text-center text-gray-500 h-full flex items-center justify-center">
+            <p>Select a table or reservation</p>
+          </div>
+        </turbo-frame>
+      </div>
+    </div>
+
+    <!-- Action Bar -->
+    <%= render "ui/reservations_action_bar" %>
+
+    <!-- Keyboard shortcuts hint -->
+    <div class="px-4 py-2 bg-gray-900 border-t border-gray-700 text-xs text-gray-500 text-center">
+      Shortcuts: N (New) | I (Check-in) | E (End) | + (Extend) | X (Cancel) | M (Move) | / (Search)
+    </div>
+  </div>
+</turbo-frame>

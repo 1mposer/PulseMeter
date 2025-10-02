@@ -1,0 +1,34 @@
+<turbo-frame id="reservations_left">
+  <div class="p-4 space-y-3">
+    <% if @available_tables.empty? %>
+      <!-- Empty state -->
+      <div class="p-12 text-center">
+        <div class="text-5xl text-gray-600 mb-4">◎</div>
+        <p class="text-lg text-gray-400">All tables are booked soon</p>
+        <p class="text-sm text-gray-500 mt-2">Check back later for availability</p>
+      </div>
+    <% else %>
+      <% @available_tables.each do |table| %>
+      <button
+        data-turbo-frame="reservations_drawer"
+        data-action="click->reservations#selectAvailableTable"
+        data-table-id="<%= table[:id] %>"
+        tabindex="0"
+        class="w-full p-4 bg-gray-800 hover:bg-gray-700 rounded-lg border border-gray-700 hover:border-blue-500 transition-all text-left focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+        onclick="this.href = '<%= new_reservation_path(table_id: table[:id]) %>'; return true;"
+      >
+        <div class="flex justify-between items-start">
+          <div>
+            <h3 class="text-lg font-semibold text-white"><%= table[:name] %></h3>
+            <p class="text-sm text-gray-400 mt-1">Capacity: <%= table[:capacity] %> guests</p>
+          </div>
+          <div class="text-right">
+            <p class="text-sm text-gray-400">Free until</p>
+            <p class="text-lg font-medium text-green-400"><%= table[:free_until] %></p>
+          </div>
+        </div>
+      </button>
+      <% end %>
+    <% end %>
+  </div>
+</turbo-frame>

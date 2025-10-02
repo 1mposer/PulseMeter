@@ -1,0 +1,126 @@
+<div class="h-screen flex flex-col bg-gray-900 text-white" data-controller="shell hotkeys help-overlay">
+  <!-- Top Bar -->
+  <header class="flex items-center justify-between px-6 py-3 bg-gray-800 border-b border-gray-700" data-turbo-permanent>
+    <!-- Left: Time/Date -->
+    <div class="flex items-center gap-4" data-controller="clock" data-clock-now-value="<%= Time.current.iso8601 %>">
+      <time
+        class="text-sm text-gray-400"
+        data-clock-target="time"
+      >
+        <%= Time.current.strftime("%b %d, %Y %H:%M") %>
+      </time>
+      <span class="text-sm text-gray-500">|</span>
+      <span class="text-sm font-medium text-gray-300" data-clock-target="shift">
+        <%=
+          hour = Time.current.hour
+          if hour >= 6 && hour < 14
+            'Shift 1'
+          elsif hour >= 14 && hour < 22
+            'Shift 2'
+          else
+            'Shift 3'
+          end
+        %>
+      </span>
+    </div>
+
+    <!-- Center: Search -->
+    <div class="flex-1 max-w-md mx-6">
+      <input
+        type="search"
+        placeholder="Search... (Press /)"
+        data-hotkeys-target="search"
+        class="w-full px-4 py-2 bg-gray-700 text-white placeholder-gray-400 rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+      >
+    </div>
+
+    <!-- Right: Quick toggles -->
+    <div class="flex items-center gap-2">
+      <button class="px-3 py-1 text-sm bg-gray-700 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">1</button>
+      <button class="px-3 py-1 text-sm bg-gray-700 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">2</button>
+      <button class="px-3 py-1 text-sm bg-gray-700 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">3</button>
+      <button
+        data-action="click->help-overlay#toggle"
+        class="ml-2 px-3 py-1 text-sm bg-gray-700 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        title="Keyboard shortcuts (?)">
+        ?
+      </button>
+    </div>
+  </header>
+
+  <div class="flex flex-1 overflow-hidden">
+    <!-- Left Sidebar -->
+    <nav class="w-48 bg-gray-800 border-r border-gray-700 flex flex-col" data-turbo-permanent>
+      <div class="flex-1 py-4">
+        <button
+          data-panel="tables"
+          data-action="click->shell#loadPanel"
+          data-shell-target="navButton"
+          aria-current="<%= @initial_panel == 'tables' || !@initial_panel ? 'page' : 'false' %>"
+          class="w-full px-4 py-6 text-left font-medium transition-colors hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 aria-[current=page]:bg-blue-600 aria-[current=page]:text-white"
+        >
+          <span class="text-lg">Tables</span>
+          <span class="block text-xs text-gray-400 mt-1">Press T</span>
+        </button>
+
+        <button
+          data-panel="consoles"
+          data-action="click->shell#loadPanel"
+          data-shell-target="navButton"
+          aria-current="<%= @initial_panel == 'consoles' ? 'page' : 'false' %>"
+          class="w-full px-4 py-6 text-left font-medium transition-colors hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 aria-[current=page]:bg-blue-600 aria-[current=page]:text-white"
+        >
+          <span class="text-lg">PS</span>
+          <span class="block text-xs text-gray-400 mt-1">Press P</span>
+        </button>
+
+        <button
+          data-panel="goods"
+          data-action="click->shell#loadPanel"
+          data-shell-target="navButton"
+          aria-current="<%= @initial_panel == 'goods' ? 'page' : 'false' %>"
+          class="w-full px-4 py-6 text-left font-medium transition-colors hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 aria-[current=page]:bg-blue-600 aria-[current=page]:text-white"
+        >
+          <span class="text-lg">Goods sale</span>
+          <span class="block text-xs text-gray-400 mt-1">Press G</span>
+        </button>
+
+        <button
+          data-panel="reservations"
+          data-action="click->shell#loadPanel"
+          data-shell-target="navButton"
+          aria-current="<%= @initial_panel == 'reservations' ? 'page' : 'false' %>"
+          class="w-full px-4 py-6 text-left font-medium transition-colors hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 aria-[current=page]:bg-blue-600 aria-[current=page]:text-white"
+        >
+          <span class="text-lg">Reservation</span>
+          <span class="block text-xs text-gray-400 mt-1">Press R</span>
+        </button>
+      </div>
+
+      <!-- Footer links -->
+      <div class="p-4 border-t border-gray-700">
+        <a href="#" class="block text-sm text-gray-400 hover:text-white py-1">wifi join</a>
+        <a href="#" class="block text-sm text-gray-400 hover:text-white py-1">Admin Dash</a>
+        <a href="#" class="block text-sm text-gray-400 hover:text-white py-1">PulseMeter</a>
+      </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-auto bg-gray-950">
+      <turbo-frame id="main_panel" class="block h-full" data-controller="loading">
+        <% if @initial_panel %>
+          <%= turbo_frame_tag "main_panel", src: ui_panel_path(@initial_panel) %>
+        <% else %>
+          <div class="flex items-center justify-center h-full text-gray-500">
+            <p class="text-lg">Select a panel from the sidebar to begin</p>
+          </div>
+        <% end %>
+      </turbo-frame>
+    </main>
+
+    <!-- Entity Drawer (placeholder for later) -->
+    <aside id="entity_drawer" class="hidden w-96 bg-gray-800 border-l border-gray-700">
+      <!-- Drawer content will be loaded here -->
+    </aside>
+  </div>
+</div>
