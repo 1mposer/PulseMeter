@@ -1,0 +1,101 @@
+<turbo-frame id="reservations_drawer">
+  <div class="p-6 h-full flex flex-col">
+    <h2 class="text-xl font-bold text-white mb-4">
+      New Reservation
+      <% if @table_name %>
+        <span class="text-gray-400">- <%= @table_name %></span>
+      <% end %>
+    </h2>
+
+    <form class="flex-1 flex flex-col space-y-4">
+      <!-- Start Time -->
+      <div>
+        <label class="block text-sm font-medium text-gray-400 mb-1">Start Time</label>
+        <input
+          type="datetime-local"
+          value="<%= Time.current.strftime('%Y-%m-%dT%H:%M') %>"
+          class="w-full px-3 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+      </div>
+
+      <!-- Duration Chips -->
+      <div>
+        <label class="block text-sm font-medium text-gray-400 mb-2">Duration</label>
+        <div class="flex gap-2">
+          <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">60 min</button>
+          <button type="button" class="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">90 min</button>
+          <button type="button" class="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">120 min</button>
+        </div>
+      </div>
+
+      <!-- Guest Name -->
+      <div>
+        <label class="block text-sm font-medium text-gray-400 mb-1">Guest Name</label>
+        <input
+          type="text"
+          placeholder="Enter guest name"
+          class="w-full px-3 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+      </div>
+
+      <!-- Phone -->
+      <div>
+        <label class="block text-sm font-medium text-gray-400 mb-1">Phone</label>
+        <input
+          type="tel"
+          placeholder="05X-XXX-XXXX"
+          class="w-full px-3 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+      </div>
+
+      <!-- Table Selection (if not pre-selected) -->
+      <% unless @table_id %>
+        <div>
+          <label class="block text-sm font-medium text-gray-400 mb-1">Table</label>
+          <select class="w-full px-3 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">Select a table</option>
+            <option value="1">Table 1 (4 guests)</option>
+            <option value="2">Table 2 (2 guests)</option>
+            <option value="3">Table 3 (6 guests)</option>
+            <option value="4">Table 4 (4 guests)</option>
+            <option value="5">VIP 1 (8 guests)</option>
+            <option value="6">VIP 2 (10 guests)</option>
+          </select>
+        </div>
+      <% end %>
+
+      <!-- Notes -->
+      <div>
+        <label class="block text-sm font-medium text-gray-400 mb-1">Notes</label>
+        <textarea
+          rows="3"
+          placeholder="Special requests, celebrations, etc."
+          class="w-full px-3 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        ></textarea>
+      </div>
+
+      <!-- Spacer -->
+      <div class="flex-1"></div>
+
+      <!-- Actions -->
+      <div class="space-y-2 pt-4 border-t border-gray-700">
+        <button
+          type="button"
+          data-controller="toast"
+          data-action="click->toast#showSuccess"
+          data-toast-message="Reservation created (UI stub)"
+          class="w-full py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+        >
+          Reserve
+        </button>
+        <button
+          type="button"
+          onclick="document.getElementById('reservations_drawer').innerHTML = '<div class=\'p-8 text-center text-gray-500 h-full flex items-center justify-center\'><p>Select a table or reservation</p></div>'"
+          class="w-full py-2 bg-gray-700 text-gray-300 rounded hover:bg-gray-600"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</turbo-frame>
